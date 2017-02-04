@@ -11,7 +11,7 @@ export default class App extends React.Component {
   
   render() {
     return (
-      <MyContentBox data={contentJSON}></MyContentBox>
+      <MyContentBox data={contentJSON} />
     );
   }
 }

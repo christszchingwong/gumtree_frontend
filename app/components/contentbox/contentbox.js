@@ -18,13 +18,10 @@ class MyPanelTitle extends React.Component{
 class MyPanelBody extends React.Component{
   render(){
     let htmlObj = {
-      __html : this.props.content.description.replace(/[\u0096]/g,"&mdash")
+      // sanitize that \u0096 : http://konfiguracja.c0.pl/webpl/index_en.html
+      __html : this.props.content.description.replace(/[�]/g,'\u2013')
     }
     let hasThumbnail =  !!this.props.content.thumbnail;
-    let collapsed = !!this.props.collapsed;
-    if (collapsed){
-      return <div className="PanelBody" />;
-    }
     if (hasThumbnail){
       return (
         <div className="PanelBody">

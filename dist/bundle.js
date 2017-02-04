@@ -159,13 +159,10 @@ var MyPanelBody = function (_React$Component2) {
     key: "render",
     value: function render() {
       var htmlObj = {
-        __html: this.props.content.description.replace(/[\u0096]/g, "&mdash")
+        // sanitize that \u0096 : http://konfiguracja.c0.pl/webpl/index_en.html
+        __html: this.props.content.description.replace(/[�]/g, "\u2013")
       };
       var hasThumbnail = !!this.props.content.thumbnail;
-      var collapsed = !!this.props.collapsed;
-      if (collapsed) {
-        return _react2.default.createElement("div", { className: "PanelBody" });
-      }
       if (hasThumbnail) {
         return _react2.default.createElement(
           "div",
