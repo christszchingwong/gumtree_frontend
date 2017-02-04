@@ -1,37 +1,35 @@
-# You've added your first Readme file!
-A README.md file is intended to quickly orient readers to what your project can do.  New to Markdown? [Learn more](https://go.microsoft.com/fwlink/p/?LinkId=524306&clcid=0x409)
+# Ebay Interview Test - Gumtree Australia Front-end 
 
-## Edit this README and commit your change to a topic branch
-In Git, branches are cheap.  You should use them whenever you're making changes to your repository.  Edit this file by clicking on the edit icon.
+## To do
+Implement the content box widget in the screenshot. URL is [here](http://gumtreefrontendtest.azurewebsites.net/dist)
 
-Then make some changes to this README file.
+###Requirements:
+- Use React Framework  
+    Code generated using yeoman with generator [generator-react-sass-es2015](https://www.npmjs.com/package/generator-react-sass-es2015). As this is only a simple context box, I did not bring in flux/redux for the application state checking.
+- Do not use any open source plugin to achieve this  
+    At the very beginning I thought of using materialize CSS framework as the widget is exactly an collapsible control. Under this requirement I went back to write plain css (in SASS of course) and wrote my own React components.
+- The content must come from .json file  
+    This is a little bit tricky. There is an encoding error in the content.json. Without the right to touch anything on the .json file, I sanitize the \u0096 character using string replace for quick fix. Looking forward to any library that could fix the [list](http://konfiguracja.c0.pl/webpl/index_en.html) though.
+- Must be functional; the Previous and Next buttons must be clickable and update the content, the content box must be collapsible/expandable
+    For the prev/next buttons, it is implemented as the user can always use the prev/next buttons. Once the start/end of contents is reached, the prev/next button will loop back to the end/start of contents array. Please let me know if I need to stop the user from browsing though the list. The content box is expanable/collapsible, but if the content box is collapsed, prev/next buttons are removed from screen.
+- Must be responsive  
+    For this I only demostrated on the ipad-mini content. You may notice the paragraph next to the thumbnail wrap below it when the screen size is below 400px.
+- Error handling  
+    I wonder what kind of error is expected...
+- Add as many comments as possible to explain your code  
+    Done.
 
-> Make some **edits** to _this_ blockquote
-
-When you are done, click the dropdown arrow next to the save button - that will allow you to commit your changes to a new branch.
-
-## Create a pull request to contribute your changes back into master
-Pull requests are the way to move changes from a topic branch back into the master branch.
-
-Click on the **Pull Requests** page in the **CODE** hub, then click "New Pull Request" to create a new pull request from your topic branch to the master branch.
-
-When you are done adding details, click "Create Pull request". Once a pull request is sent, reviewers can see your changes, recommend modifications, or even push follow-up commits.
-
-First time creating a pull request?  [Learn more](https://go.microsoft.com/fwlink/?LinkId=533211&clcid=0x409)
-
-### Congratulations! You've completed the grand tour of the CODE hub!
-
-# Next steps
-
-If you haven't already done so, [install Git](https://git-scm.com/downloads) (as well as [Git Credential Manager](https://java.visualstudio.com/Downloads/gitcredentialmanager/Index) for Linux or Mac OS)
-
-Choose and install one of these supported IDEs:
-* [Visual Studio](https://go.microsoft.com/fwlink/?LinkId=309297&clcid=0x409&slcid=0x409)
-* [Android Studio](https://developer.android.com/studio) (with [Team Services Plugin](https://java.visualstudio.com/Downloads/intellijplugin/Index))
-* [Eclipse](https://www.eclipse.org/downloads) (with [Team Explorer Everywhere](https://java.visualstudio.com/Downloads/eclipseplugin/Index))
-* [IntelliJ IDEA](https://www.jetbrains.com/idea/download) (with [Team Services Plugin](https://java.visualstudio.com/Downloads/intellijplugin/Index))
-* [Visual Studio Code](https://code.visualstudio.com/Download) (with [Team Services Extension](https://java.visualstudio.com/Downloads/visualstudiocode/Index))
-
-Then clone this repo to your local machine to get started with your own project.
-
-Happy coding!
+###Bonus points:
+- Server side rendering  
+    The development environment was prepared by yeoman. I have gulp-connect as web server at development. Then it is clear that all scripts delivered to the browser is already compiled.  
+    With the help of es6, it is easy to import the .json contents and bundle with other js files. No extra HTTP request is issued to fetch the json object.  
+    To deliver a sample page to you, I make use of a free Azure WebSite service and used git to push the complied web files to Azure.  
+    Hope that you don't need me to push the contents to a Database which save me the cost of finding a public accessible database.
+- Use of SASS where appropriate  
+    As requested. The generated gulpfile.js manifest file recognise the SCSS syntax as default though. It shouldn't be an issue.
+- Any optimisation to reduce load time  
+    The thumbnail image was resized to fit the rendered image size. JS/CSS files were minified with the help of gulp plugins.
+- Search engines friendly  
+    Added META tag in the HEAD tag for content keywords. I don't have much experience for the search engine optimisation now as they keep changing the evaluation algorithms.
+- UEX optimisation  
+    I bind the collapsible event handler to the whole panel title so user don't have to click that small triangle on screen. I am happy with the design for now. 
