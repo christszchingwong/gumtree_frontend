@@ -1,0 +1,136 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300);
+@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
+
+body {
+  font: 100% 'Open Sans', Helvetica, Arial, sans-serif;
+  background: #ecebe8;
+  color: #222;
+  margin: 0;
+}
+
+div#app{
+  display: flex;
+  flex-direction: column;
+  vertical-align: center;
+  align-items: center;
+  padding: 10px;
+}
+
+/* copied from https://www.w3cplus.com/preprocessor/sass-triangle-mixin.html */
+@mixin triangle($direction, $size, $borderColor) {
+  content: "";
+  height: 0;
+  width: 0;
+
+  @if $direction == top {
+    border-bottom: $size solid $borderColor;
+    border-left: $size dashed transparent;
+    border-right: $size dashed transparent;
+  }
+  @else if $direction == right {
+    border-left: $size solid $borderColor;
+    border-top: $size dashed transparent;
+    border-bottom: $size dashed transparent;
+  }
+  @else if $direction == bottom {
+    border-top: $size solid $borderColor;
+    border-left: $size dashed transparent;
+    border-right: $size dashed transparent;
+  }
+  @else if $direction == left {
+    border-right: $size solid $borderColor;
+    border-top: $size dashed transparent;
+    border-bottom: $size dashed transparent;
+  }
+}
+
+/* My Scripts */
+
+/* variables */
+$primary-color: #5d9919;
+$panel-color1: rgba(201, 200, 169, 1);
+$panel-color2: rgba(234, 234, 208, 1);
+
+/* classes */
+.MyPanel {
+  width: 80%;
+  max-width: 1000px;
+  border-radius: 5px 5px 2px 2px;
+  box-shadow: 5px 5px 10px -5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: no-wrap;
+}
+
+.padding {
+  padding: 10px;
+}
+
+/* float - quick floats, no time to copy others */
+.float-right {
+  float: right;
+}
+
+.float-left {
+  float: left;
+}
+
+.clearfix {
+  overflow: auto;
+}
+
+.PanelTitle {
+  background: $panel-color1;
+  background: linear-gradient(90deg, $panel-color2, $panel-color1);
+  border-radius: 5px 5px 0px 0px;
+  padding: 10px;
+  font-weight: bolder;
+  // hardcode color for material icons
+  .material-icons{
+    color: $primary-color;
+  }
+}
+
+.PanelBody {
+  width: 100%;
+  background: white;
+  display: flex;
+  flex-direction: row;
+  min-width: 150px;
+}
+// well that little responsive ability doesn't hurt
+@media screen and (max-width: 200px){
+  flex-wrap: wrap
+}
+
+.PanelFooter {
+  width: 100%;
+  margin-top: 1px;
+  background: white;
+  border-radius: 0px 0px 2px 2px;
+  color: $primary-color;
+}
+
+.FooterPrev {
+  float: left;
+  text-decoration: underline;
+
+  > .triangle {
+    @include triangle(left, 0.6em, $primary-color);
+
+    float: left;
+    margin-right: 1em;
+  }
+}
+
+.FooterNext {
+  float: right;
+  text-decoration: underline;
+
+  > .triangle {
+    @include triangle(right, 0.6em, $primary-color);
+
+    float: right;
+    margin-left: 1em;
+  }
+}
