@@ -6,7 +6,10 @@ var gulp = require('gulp'),
     browserify = require('browserify'),
     babelify = require('babelify'),
     sass = require('gulp-sass'),
-    concat = require('gulp-concat');
+    concat = require('gulp-concat'),
+    uglify = require('gulp-uglify'),
+    streamify = require('gulp-streamify'),
+    minifyCss = require('gulp-minify-css');
 
 var config = {
   uri: 'http://localhost:3000',
@@ -32,6 +35,7 @@ gulp.task('js', () => {
     .bundle()
     .on('error', console.error.bind(console))
     .pipe(source('bundle.js'))
+    .pipe(streamify(uglify())) 
     .pipe(gulp.dest(config.paths.dist))
     .pipe(connect.reload());
 });
@@ -40,6 +44,7 @@ gulp.task('sass', () => {
   gulp.src(config.paths.sass)
     .pipe(sass().on('error', sass.logError))
     .pipe(concat('bundle.css'))
+    .pipe(minifyCss())
     .pipe(gulp.dest(config.paths.dist))
     .pipe(connect.reload());
 });
